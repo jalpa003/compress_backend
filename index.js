@@ -3,7 +3,7 @@ const app  = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3030;
-const UserRoutes = require('./routes/user_routes');
+const UserRoutes = require('./src/routes/user_routes');
 
 app.use(express.static('uploads'));
 app.use(bodyParser.json());
