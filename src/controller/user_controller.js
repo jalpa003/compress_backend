@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const UserModel = require('../models/user_model');
 const { response } = require('express');
 const docxpdf = require('docx-pdf');
+const lame = require('lamejs');
 
 
 const fs = require("fs");
@@ -36,14 +37,15 @@ const userController = {
             const filename = req.file.originalname;
             const name =  filename.split("/").slice(-1).join().split(".").shift() + ".pdf";
             
-           docxpdf(req.file.path,"uploads\\" + name,function(err,result){
+           docxpdf(req.file.path,"uploads/" + name,function(err,result){
             if(err){
                 console.log(err);
                 return res.json({success:false,err:err,message:"Something went wrong"});
             }
             else{
                 console.log('result'+result);
-                const filePath = "uploads\\" + name;
+                //change acc to server
+                const filePath = "uploads/" + name;
                 const now = new Date();
                 if (fs.existsSync(req.file.path)) {
                     // Delete the file
@@ -68,7 +70,22 @@ const userController = {
         }
     
 
-    }
+    },
+    
+    audiocompress: async function(req,res){
+      const mp3encoder = new lamejs.Mp3Encoder(1, SAMPLE_RATE, KBPS);
+      let samples = audioBuffer.getChannelData(0).map(x => x * 32767.5);
+      const encoded = mp3encoder.encodeBuffer(samples);
+      mp3Data.push(encoded);
+      mp3Data.push(mp3encoder.flush());
+
 }
+
+
+
+}
+
+
+
 
 module.exports = userController;
