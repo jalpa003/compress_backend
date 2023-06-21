@@ -47,17 +47,19 @@ const userController = {
                 //change acc to server
                 const filePath = "uploads/" + name;
                 const now = new Date();
-                if (fs.existsSync(req.file.path)) {
-                    // Delete the file
-                    fs.unlinkSync(req.file.path);
-                  }
-                setTimeout(() => {
-                    // Check if the file still exists
-                    if (fs.existsSync(filePath)) {
-                      // Delete the file
-                      fs.unlinkSync(filePath);
-                    }
-                  }, 600000);
+
+                // to remove the server upload files to save space
+                // if (fs.existsSync(req.file.path)) {
+                //     // Delete the file
+                //     fs.unlinkSync(req.file.path);
+                //   }
+                // setTimeout(() => {
+                //     // Check if the file still exists
+                //     if (fs.existsSync(filePath)) {
+                //       // Delete the file
+                //       fs.unlinkSync(filePath);
+                //     }
+                //   }, 600000);
 
                   return res.json({success:true,convertedpdf:name})
             }
