@@ -14,5 +14,5 @@ app.use("/api/user",UserRoutes);
 mongoose.connect("mongodb+srv://mafiamundeerking:compressapp@cluster0.aoqocuh.mongodb.net/?retryWrites=true&w=majority");
 
 app.get("/",function(req,res){
-    res.send("started");
+    res.send(PORT);
 });
